@@ -1,0 +1,1140 @@
+%!PS-Adobe-3.0
+%%Title: agendina.txt
+%%For: Andrea Pagnani
+%%Creator: a2ps version 4.13
+%%CreationDate: Wed Oct 19 17:01:51 2005
+%%BoundingBox: 24 24 588 768
+%%DocumentData: Clean7Bit
+%%Orientation: Landscape
+%%Pages: 2
+%%PageOrder: Ascend
+%%DocumentMedia: Letter 612 792 0 () ()
+%%DocumentNeededResources: font Courier
+%%+ font Courier-Bold
+%%+ font Courier-BoldOblique
+%%+ font Courier-Oblique
+%%+ font Helvetica
+%%+ font Helvetica-Bold
+%%+ font Symbol
+%%+ font Times-Bold
+%%+ font Times-Roman
+%%DocumentProcessColors: Black 
+%%DocumentSuppliedResources: procset a2ps-a2ps-hdr
+%%+ procset a2ps-black+white-Prolog
+%%+ encoding ISO-8859-1Encoding
+%%EndComments
+/a2psdict 200 dict def
+a2psdict begin
+%%BeginProlog
+%%Copyright: (c) 1988, 89, 90, 91, 92, 93 Miguel Santana
+%%Copyright: (c) 1995, 96, 97, 98 Akim Demaille, Miguel Santana
+% Check PostScript language level.
+/languagelevel where {
+  pop /gs_languagelevel languagelevel def
+} {
+  /gs_languagelevel 1 def
+} ifelse
+
+% EPSF import as in the Red Book
+/BeginInclude {
+  /b4_Inc_state save def    		% Save state for cleanup
+  /dict_count countdictstack def	% Count objects on dict stack
+  /op_count count 1 sub def		% Count objects on operand stack 
+  userdict begin
+    0 setgray 0 setlinecap
+    1 setlinewidth 0 setlinejoin
+    10 setmiterlimit [ ] 0 setdash newpath
+    gs_languagelevel 1 ne {
+      false setstrokeadjust false setoverprint 
+    } if
+} bind def
+
+/EndInclude {
+  count op_count sub { pos } repeat	% Clean up stacks
+  countdictstack dict_count sub { end } repeat
+  b4_Inc_state restore
+} bind def
+
+/BeginEPSF {
+  BeginInclude
+  /showpage { } def
+} bind def
+
+/EndEPSF {
+  EndInclude
+} bind def
+
+% Page prefeed
+/page_prefeed {         % bool -> -
+  statusdict /prefeed known {
+    statusdict exch /prefeed exch put
+  } {
+    pop
+  } ifelse
+} bind def
+
+/deffont {
+  findfont exch scalefont def
+} bind def
+
+/reencode_font {
+  findfont reencode 2 copy definefont pop def
+} bind def
+
+% Function c-show (str => -)
+% centers text only according to x axis.
+/c-show { 
+  dup stringwidth pop
+  2 div neg 0 rmoveto
+  show
+} bind def
+
+% Function l-show (str => -)
+% prints texts so that it ends at currentpoint
+/l-show {
+  dup stringwidth pop neg 
+  0 
+  rmoveto show
+} bind def
+
+% center-fit show (str w => -)
+% show centered, and scale currentfont so that the width is less than w
+/cfshow {
+  exch dup stringwidth pop
+  % If the title is too big, try to make it smaller
+  3 2 roll 2 copy
+  gt
+  { % if, i.e. too big
+    exch div
+    currentfont exch scalefont setfont
+  } { % ifelse
+    pop pop 
+  }
+  ifelse
+  c-show			% center title
+} bind def
+
+% Return the y size of the current font
+% - => fontsize
+/currentfontsize {
+  currentfont /FontType get 0 eq {
+    currentfont /FontMatrix get 3 get
+  }{
+    currentfont /FontMatrix get 3 get 1000 mul
+  } ifelse
+} bind def
+
+% reencode the font
+% <encoding-vector> <fontdict> -> <newfontdict>
+/reencode { %def
+  dup length 5 add dict begin
+    { %forall
+      1 index /FID ne 
+      { def }{ pop pop } ifelse
+    } forall
+    /Encoding exch def
+
+    % Use the font's bounding box to determine the ascent, descent,
+    % and overall height; don't forget that these values have to be
+    % transformed using the font's matrix.
+    % We use `load' because sometimes BBox is executable, sometimes not.
+    % Since we need 4 numbers an not an array avoid BBox from being executed
+    /FontBBox load aload pop
+    FontMatrix transform /Ascent exch def pop
+    FontMatrix transform /Descent exch def pop
+    /FontHeight Ascent Descent sub def
+
+    % Define these in case they're not in the FontInfo (also, here
+    % they're easier to get to.
+    /UnderlinePosition 1 def
+    /UnderlineThickness 1 def
+    
+    % Get the underline position and thickness if they're defined.
+    currentdict /FontInfo known {
+      FontInfo
+      
+      dup /UnderlinePosition known {
+	dup /UnderlinePosition get
+	0 exch FontMatrix transform exch pop
+	/UnderlinePosition exch def
+      } if
+      
+      dup /UnderlineThickness known {
+	/UnderlineThickness get
+	0 exch FontMatrix transform exch pop
+	/UnderlineThickness exch def
+      } if
+      
+    } if
+    currentdict 
+  end 
+} bind def
+
+% composite fonts for ASCII-EUC mixed string
+% Version 1.2 1/31/1990
+% Orignal Ken'ichi HANDA (handa@etl.go.jp)
+% Modified Norio Katayama (katayama@rd.nacsis.ac.jp),1998
+% Extend & Fix Koji Nakamaru (maru@on.cs.keio.ac.jp), 1999
+% Anyone can freely copy, modify, distribute this program.
+
+/copyfont {	% font-dic extra-entry-count  copyfont  font-dic
+	1 index maxlength add dict begin
+	{	1 index /FID ne 2 index /UniqueID ne and
+		{def} {pop pop} ifelse
+	} forall
+	currentdict
+	end
+} bind def
+
+/compositefont { % ASCIIFontName EUCFontName RomanScale RomanOffset Rot(T/F) compositefont font
+    /RomanRotation exch def
+    /RomanOffset exch def
+    /RomanScale exch def
+    userdict /fixeucfont_dict known not {
+	userdict begin
+	    /fixeucfont_dict 2 dict begin
+		/UpperByteEncoding [
+		    16#00 1 16#20 { pop 0 } for
+		    16#21 1 16#28 { 16#20 sub } for
+		    16#29 1 16#2F { pop 0 } for
+		    16#30 1 16#74 { 16#27 sub } for
+		    16#75 1 16#FF { pop 0 } for
+		] def
+	        /LowerByteEncoding [
+		    16#00 1 16#A0 { pop /.notdef } for
+		    16#A1 1 16#FE { 16#80 sub 16 2 string cvrs
+				    (cXX) dup 1 4 -1 roll
+				    putinterval cvn } for
+		    /.notdef
+		] def
+		currentdict
+	    end def
+	end
+    } if
+    findfont dup /FontType get 0 eq {
+	14 dict begin
+	    %
+	    % 7+8 bit EUC font
+	    %
+	    12 dict begin
+		/EUCFont exch def
+		/FontInfo (7+8 bit EUC font) readonly def
+		/PaintType 0 def
+		/FontType 0 def
+		/FontMatrix matrix def
+		% /FontName
+		/Encoding fixeucfont_dict /UpperByteEncoding get def
+		/FMapType 2 def
+		EUCFont /WMode known
+		{ EUCFont /WMode get /WMode exch def }
+		{ /WMode 0 def } ifelse
+		/FDepVector [
+		    EUCFont /FDepVector get 0 get
+		    [ 16#21 1 16#28 {} for 16#30 1 16#74 {} for ]
+		    {
+			13 dict begin
+			    /EUCFont EUCFont def
+			    /UpperByte exch 16#80 add def	
+			    % /FontName
+			    /FontInfo (EUC lower byte font) readonly def
+			    /PaintType 0 def
+			    /FontType 3 def
+			    /FontMatrix matrix def
+			    /FontBBox {0 0 0 0} def
+			    /Encoding
+				fixeucfont_dict /LowerByteEncoding get def
+			    % /UniqueID
+			    % /WMode
+			    /BuildChar {
+				gsave
+				exch dup /EUCFont get setfont
+				/UpperByte get
+				2 string
+				dup 0 4 -1 roll put
+				dup 1 4 -1 roll put
+				dup stringwidth setcharwidth
+				0 0 moveto show
+				grestore
+			    } bind def
+			    currentdict
+			end
+			/lowerbytefont exch definefont
+		    } forall
+		] def
+		currentdict
+	    end
+	    /eucfont exch definefont
+	    exch
+	    findfont 1 copyfont dup begin
+		RomanRotation {
+			/FontMatrix FontMatrix
+			[ 0 RomanScale neg RomanScale 0 RomanOffset neg 0 ]
+			matrix concatmatrix def
+		}{
+			/FontMatrix FontMatrix
+			[ RomanScale 0 0 RomanScale 0 RomanOffset ] matrix concatmatrix
+			def
+			/CDevProc
+			    {pop pop pop pop 0 exch -1000 exch 2 div 880} def
+		} ifelse
+	    end
+	    /asciifont exch definefont
+	    exch
+	    /FDepVector [ 4 2 roll ] def
+	    /FontType 0 def
+	    /WMode 0 def
+	    /FMapType 4 def
+	    /FontMatrix matrix def
+	    /Encoding [0 1] def
+	    /FontBBox {0 0 0 0} def
+%	    /FontHeight 1.0 def % XXXX
+	    /FontHeight RomanScale 1.0 ge { RomanScale }{ 1.0 } ifelse def
+	    /Descent -0.3 def   % XXXX
+	    currentdict
+	end
+	/tmpfont exch definefont
+	pop
+	/tmpfont findfont
+    }{
+	pop findfont 0 copyfont
+    } ifelse
+} def	
+
+/slantfont {	% FontName slant-degree  slantfont  font'
+    exch findfont 1 copyfont begin
+    [ 1 0 4 -1 roll 1 0 0 ] FontMatrix exch matrix concatmatrix
+    /FontMatrix exch def
+    currentdict
+    end
+} def
+
+% Function print line number (<string> # -)
+/# {
+  gsave
+    sx cw mul neg 2 div 0 rmoveto
+    f# setfont
+    c-show
+  grestore
+} bind def
+
+% -------- Some routines to enlight plain b/w printings ---------
+
+% Underline
+% width --
+/dounderline {
+  currentpoint
+  gsave
+    moveto
+    0 currentfont /Descent get currentfontsize mul rmoveto
+    0 rlineto
+    stroke
+  grestore
+} bind def
+
+% Underline a string
+% string --
+/dounderlinestring {
+  stringwidth pop
+  dounderline
+} bind def
+
+/UL {
+  /ul exch store
+} bind def
+
+% Draw a box of WIDTH wrt current font
+% width --
+/dobox {
+  currentpoint
+  gsave
+    newpath
+    moveto
+    0 currentfont /Descent get currentfontsize mul rmoveto
+    dup 0 rlineto
+    0 currentfont /FontHeight get currentfontsize mul rlineto
+    neg 0 rlineto
+    closepath
+    stroke
+  grestore
+} bind def
+
+/BX {
+  /bx exch store
+} bind def
+
+% Box a string
+% string --
+/doboxstring {
+  stringwidth pop
+  dobox
+} bind def
+
+%
+% ------------- Color routines ---------------
+%
+/FG /setrgbcolor load def
+
+% Draw the background
+% width --
+/dobackground {
+  currentpoint
+  gsave
+    newpath
+    moveto
+    0 currentfont /Descent get currentfontsize mul rmoveto
+    dup 0 rlineto
+    0 currentfont /FontHeight get currentfontsize mul rlineto
+    neg 0 rlineto
+    closepath
+    bgcolor aload pop setrgbcolor
+    fill
+  grestore
+} bind def
+
+% Draw bg for a string
+% string --
+/dobackgroundstring {
+  stringwidth pop
+  dobackground
+} bind def
+
+
+/BG {
+  dup /bg exch store
+  { mark 4 1 roll ] /bgcolor exch store } if
+} bind def
+
+
+/Show {
+  bg { dup dobackgroundstring } if
+  ul { dup dounderlinestring } if
+  bx { dup doboxstring } if
+  show
+} bind def
+
+% Function T(ab), jumps to the n-th tabulation in the current line
+/T {
+  cw mul x0 add
+  bg { dup currentpoint pop sub dobackground } if
+  ul { dup currentpoint pop sub dounderline } if
+  bx { dup currentpoint pop sub dobox } if
+  y0 moveto
+} bind def
+
+% Function n: move to the next line
+/n {
+  /y0 y0 bfs sub store
+  x0 y0 moveto
+} bind def
+
+% Function N: show and move to the next line
+/N {
+  Show
+  /y0 y0 bfs sub store
+  x0 y0 moveto
+} bind def
+
+/S {
+  Show
+} bind def
+
+%%BeginResource: procset a2ps-a2ps-hdr 2.0 2
+%%Copyright: (c) 1988, 89, 90, 91, 92, 93 Miguel Santana
+%%Copyright: (c) 1995, 96, 97, 98 Akim Demaille, Miguel Santana
+% Function title: prints page header.
+% <ct> <rt> <lt> are passed as argument
+/title { 
+  % 1. Draw the background
+  x v get y v get moveto
+  gsave
+    0 th 2 div neg rmoveto 
+    th setlinewidth
+    0.95 setgray
+    pw 0 rlineto stroke
+  grestore
+  % 2. Border it
+  gsave
+    0.7 setlinewidth
+    pw 0 rlineto
+    0 th neg rlineto
+    pw neg 0 rlineto
+    closepath stroke
+  grestore
+  % stk: ct rt lt
+  x v get y v get th sub 1 add moveto
+%%IncludeResource: font Helvetica
+  fHelvetica fnfs 0.8 mul scalefont setfont
+  % 3. The left title
+  gsave
+    dup stringwidth pop fnfs 0.8 mul add exch % leave space took on stack
+    fnfs 0.8 mul hm rmoveto
+    show			% left title
+  grestore
+  exch
+  % stk: ct ltw rt
+  % 4. the right title
+  gsave
+    dup stringwidth pop fnfs 0.8 mul add exch % leave space took on stack
+    dup
+    pw exch stringwidth pop fnfs 0.8 mul add sub
+    hm
+    rmoveto
+    show			% right title
+  grestore
+  % stk: ct ltw rtw
+  % 5. the center title
+  gsave
+    pw 3 1 roll
+    % stk: ct pw ltw rtw
+    3 copy 
+    % Move to the center of the left room
+    sub add 2 div hm rmoveto
+    % What is the available space in here?
+    add sub fnfs 0.8 mul sub fnfs 0.8 mul sub
+    % stk: ct space_left
+%%IncludeResource: font Helvetica-Bold
+  fHelvetica-Bold fnfs scalefont setfont
+    cfshow
+  grestore
+} bind def
+
+% Function border: prints virtual page border
+/border { %def
+  gsave				% print four sides
+    0 setgray
+    x v get y v get moveto
+    0.7 setlinewidth		% of the square
+    pw 0 rlineto
+    0 ph neg rlineto
+    pw neg 0 rlineto
+    closepath stroke
+  grestore
+} bind def
+
+% Function water: prints a water mark in background
+/water { %def
+  gsave
+    scx scy moveto rotate
+%%IncludeResource: font Times-Bold
+  fTimes-Bold 100 scalefont setfont
+    .97 setgray
+    dup stringwidth pop 2 div neg -50 rmoveto
+    show
+  grestore
+} bind def
+
+% Function rhead: prints the right header
+/rhead {  %def
+  lx ly moveto
+  fHelvetica fnfs 0.8 mul scalefont setfont
+  l-show
+} bind def
+
+% Function footer (cf rf lf -> -)
+/footer {
+  fHelvetica fnfs 0.8 mul scalefont setfont
+  dx dy moveto
+  show
+
+  snx sny moveto
+  l-show
+  
+  fnx fny moveto
+  c-show
+} bind def
+%%EndResource
+%%BeginResource: procset a2ps-black+white-Prolog 2.0 1
+
+% Function T(ab), jumps to the n-th tabulation in the current line
+/T { 
+  cw mul x0 add y0 moveto
+} bind def
+
+% Function n: move to the next line
+/n { %def
+  /y0 y0 bfs sub store
+  x0 y0 moveto
+} bind def
+
+% Function N: show and move to the next line
+/N {
+  Show
+  /y0 y0 bfs sub store
+  x0 y0 moveto
+}  bind def
+
+/S {
+  Show
+} bind def
+
+/p {
+  false UL
+  false BX
+  fCourier bfs scalefont setfont
+  Show
+} bind def
+
+/sy {
+  false UL
+  false BX
+  fSymbol bfs scalefont setfont
+  Show
+} bind def
+
+/k {
+  false UL
+  false BX
+  fCourier-Oblique bfs scalefont setfont
+  Show
+} bind def
+
+/K {
+  false UL
+  false BX
+  fCourier-Bold bfs scalefont setfont
+  Show
+} bind def
+
+/c {
+  false UL
+  false BX
+  fCourier-Oblique bfs scalefont setfont
+  Show
+} bind def
+
+/C {
+  false UL
+  false BX
+  fCourier-BoldOblique bfs scalefont setfont
+  Show 
+} bind def
+
+/l {
+  false UL
+  false BX
+  fHelvetica bfs scalefont setfont
+  Show
+} bind def
+
+/L {
+  false UL
+  false BX
+  fHelvetica-Bold bfs scalefont setfont
+  Show 
+} bind def
+
+/str{
+  false UL
+  false BX
+  fTimes-Roman bfs scalefont setfont
+  Show
+} bind def
+
+/e{
+  false UL
+  true BX
+  fHelvetica-Bold bfs scalefont setfont
+  Show
+} bind def
+
+%%EndResource
+%%EndProlog
+%%BeginSetup
+%%IncludeResource: font Courier
+%%IncludeResource: font Courier-Oblique
+%%IncludeResource: font Courier-Bold
+%%IncludeResource: font Times-Roman
+%%IncludeResource: font Symbol
+%%IncludeResource: font Courier-BoldOblique
+%%BeginResource: encoding ISO-8859-1Encoding
+/ISO-8859-1Encoding [
+/.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef 
+/.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef 
+/.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef 
+/.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef 
+/space /exclam /quotedbl /numbersign /dollar /percent /ampersand /quoteright 
+/parenleft /parenright /asterisk /plus /comma /minus /period /slash 
+/zero /one /two /three /four /five /six /seven 
+/eight /nine /colon /semicolon /less /equal /greater /question 
+/at /A /B /C /D /E /F /G 
+/H /I /J /K /L /M /N /O 
+/P /Q /R /S /T /U /V /W 
+/X /Y /Z /bracketleft /backslash /bracketright /asciicircum /underscore 
+/quoteleft /a /b /c /d /e /f /g 
+/h /i /j /k /l /m /n /o 
+/p /q /r /s /t /u /v /w 
+/x /y /z /braceleft /bar /braceright /asciitilde /.notdef 
+/.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef 
+/.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef 
+/.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef 
+/.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef 
+/space /exclamdown /cent /sterling /currency /yen /brokenbar /section 
+/dieresis /copyright /ordfeminine /guillemotleft /logicalnot /hyphen /registered /macron 
+/degree /plusminus /twosuperior /threesuperior /acute /mu /paragraph /bullet 
+/cedilla /onesuperior /ordmasculine /guillemotright /onequarter /onehalf /threequarters /questiondown 
+/Agrave /Aacute /Acircumflex /Atilde /Adieresis /Aring /AE /Ccedilla 
+/Egrave /Eacute /Ecircumflex /Edieresis /Igrave /Iacute /Icircumflex /Idieresis 
+/Eth /Ntilde /Ograve /Oacute /Ocircumflex /Otilde /Odieresis /multiply 
+/Oslash /Ugrave /Uacute /Ucircumflex /Udieresis /Yacute /Thorn /germandbls 
+/agrave /aacute /acircumflex /atilde /adieresis /aring /ae /ccedilla 
+/egrave /eacute /ecircumflex /edieresis /igrave /iacute /icircumflex /idieresis 
+/eth /ntilde /ograve /oacute /ocircumflex /otilde /odieresis /divide 
+/oslash /ugrave /uacute /ucircumflex /udieresis /yacute /thorn /ydieresis 
+] def
+%%EndResource
+% Initialize page description variables.
+/sh 612 def
+/sw 792 def
+/llx 24 def
+/urx 768 def
+/ury 588 def
+/lly 24 def
+/#copies 1 def
+/th 15.000000 def
+/fnfs 11 def
+/bfs 6.100000 def
+/cw 3.660000 def
+
+% Dictionary for ISO-8859-1 support
+/iso1dict 8 dict begin
+  /fCourier ISO-8859-1Encoding /Courier reencode_font
+  /fCourier-Bold ISO-8859-1Encoding /Courier-Bold reencode_font
+  /fCourier-BoldOblique ISO-8859-1Encoding /Courier-BoldOblique reencode_font
+  /fCourier-Oblique ISO-8859-1Encoding /Courier-Oblique reencode_font
+  /fHelvetica ISO-8859-1Encoding /Helvetica reencode_font
+  /fHelvetica-Bold ISO-8859-1Encoding /Helvetica-Bold reencode_font
+  /fTimes-Bold ISO-8859-1Encoding /Times-Bold reencode_font
+  /fTimes-Roman ISO-8859-1Encoding /Times-Roman reencode_font
+currentdict end def
+/bgcolor [ 0 0 0 ] def
+/bg false def
+/ul false def
+/bx false def
+% The font for line numbering
+/f# /Helvetica findfont bfs .6 mul scalefont def
+/fSymbol /Symbol findfont def
+/hm fnfs 0.25 mul def
+/pw
+   cw 99.400000 mul
+def
+/ph
+   522.769992 th add
+def
+/pmw urx llx sub pw 2 mul sub 1 div def
+/pmh 0 def
+/v 0 def
+/x [
+  0
+  dup pmw add pw add
+] def
+/y [
+  pmh ph add 0 mul ph add
+  dup
+] def
+/scx sw 2 div def
+/scy sh 2 div def
+/snx urx def
+/sny lly 2 add def
+/dx llx def
+/dy sny def
+/fnx scx def
+/fny dy def
+/lx snx def
+/ly ury fnfs 0.8 mul sub def
+/sx 0 def
+/tab 8 def
+/x0 0 def
+/y0 0 def
+%%EndSetup
+
+%%Page: (1-2) 1
+%%BeginPageSetup
+/pagesave save def
+sh 0 translate 90 rotate
+%%EndPageSetup
+iso1dict begin
+gsave
+llx lly 12 add translate
+/v 0 store
+/x0 x v get 2.562000 add sx cw mul add store
+/y0 y v get bfs th add sub store
+x0 y0 moveto
+(# AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA) p n
+() N
+(ADA SPACCESI) S 16 T () S 24 T (635895) N
+(ADELE) S 8 T () S 16 T () S 24 T (5886067) N
+(ADRIANO BARRA) S 16 T () S 24 T (06 8543134 \(cell\) 0349 5936450) N
+(AIELLI GIULIO) S 16 T () S 24 T (5138760) N
+(ALAIN BARRAT) S 16 T (\(orsay\) 01 45390457) N
+(ALBERTA CONGEDUTI) S 24 T (\(casa\) 01 45432569 \(cel\) 06 32974618 \(r.baunier 26 60A35\)) N
+(ALESSANDRA GISSI) S 24 T (4958913  \(cellu\) 0338 1077537) N
+(ALESSANDRA ROSSI) S 24 T (051 353274) N
+(ALESSANDRO QUARTA) S 24 T (86327807) N
+(ALESSIA BATTAGLIA) S 24 T (0347 7003100  \(cell. papa'\) 0347 7159025) N
+(ALESSIA DE STEFANO) S 24 T (06 8551808 \(cell\) 328 0032491 \(lucaroma\) 347 8456224 ) N
+(ALFREDO BRAUNSTEIN) S 24 T (011 8390127 \(cell\) 347 8073893) N
+(ALICE MARASCHINI) S 24 T (339 6556428) N
+(ALLEGRA VIA) S 16 T () S 24 T (8086420) N
+(ALLOUCHE 06 14410354 \( SCI ANGIE 13 Rue G. Eifelle 13362 Marseille Cedex 10 \)  ) N
+(ALLOUCHE \(padre ronny\)  06 14410131) N
+(ANDREA BALDASSARRI) S 24 T (0328 4588411 \(cell\)  01 47405921 \(paris off.\) ) N
+(ANDREA CAPOCCI) S 16 T () S 24 T (06 5403838) N
+(ANDREA DEMARTINO) S 24 T (335 5462242) N
+(ANDREA GABRIELLI   \(mum\)06 39722968 \(cell\) 333 8978023 \(uff\) 06 4455705+49) N
+(ANDREA MARCUCCI         06 8605617) N
+(ANDREA MONTANARI \(ecol norm paris\) 01 44323789 \(casa\) 01 45843302 ) N
+(ANDREONE) S 16 T () S 24 T (86201657) N
+(ANGELA) S 8 T () S 16 T () S 24 T (44238317) N
+(ANNA FERRARI) S 16 T () S 24 T (8411991) N
+(ANNA MANDINO) S 16 T () S 24 T (0335 8381477) N
+(ANTONELLA \(CASA\)) S 24 T (44251267 \(UFFICIO\)) S 48 T (36002600) N
+(ANTONIA) S 8 T () S 16 T () S 24 T (06 4385573 \(cell\) 0340 3363786) N
+(APE) S 8 T () S 16 T (        06 4991 4412 ) N
+(ARIANNA FARABOLLINI) S 24 T (27800717 \(cell\) 333 5872523) N
+(ARMANDO BRUNO \(cell.\)) S 24 T (0347 1187224) N
+() N
+(# BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB) N
+() N
+(BANLIEUE) S 16 T () S 24 T (06 247268) N
+(BIBLI) S 8 T () S 16 T () S 24 T (5884097) N
+(BOBO') S 8 T () S 16 T () S 24 T (3242862) N
+() N
+(# CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC) N
+() N
+(CARONT \(idraulico paris \) 06 71007258) N
+(CARTA DI CREDITO) S 24 T (800 254255 \(estero\) +3902 34980789 ID 224848 ) N
+(CAMILLO \(BOSTON\)) S 24 T (\(casa\) 001.617.5472342 \(uff\)4322805 \(cell\)617.4707981) N
+(CAMILLO \(ROMA\)) S 16 T () S 24 T (\(cell roma\) 338 1517569) S 48 T ( ) N
+(CAMILLO \(CETONA\)        0578 238713) N
+(CAMPUS ANGELO           06 7259 4549   \(INFM TOV.\)) N
+(CARLA \(TORRE\)) S 16 T () S 24 T (06 4064189) N
+(CARLO BUONTEMPO) S 16 T () S 24 T (\(cell\) 0339 2213642 \(via panv.\) 06 86209953 \(IFA\) 06 49934330) N
+(CARLO BUONTEMPO) S 16 T (\(mum\)) S 24 T (39736599) N
+(CARLOTTA NATOLI) S 16 T () S 24 T (5759298 \(cell\) 0338 6366998 \(paris\) 01 45410907) N
+(CASPUR) S 8 T () S 16 T () S 24 T (44779910 riccife prato) N
+(CATERINA CERRA) S 16 T () S 24 T (06 4460560 \(cell\) 340 5808615 \(OFF\) 06 7222369 ) N
+(CATERINA PADOA SCHIOPPA 0\(033\)1 43491577 \(cell francia\) 0033616072553) N
+(CECILIA) S 8 T () S 16 T () S 24 T (06 5880720   06 5800582) N
+(CECILIA) S 8 T () S 16 T () S 24 T (4440735) N
+(CECILIA ANDRENELLI) S 24 T (55286048) N
+(CELLULARE MUM & POP) S 24 T (0333 2986756 \(mum\) 333 7609144 ) N
+(CHIARA) S 8 T () S 16 T () S 24 T (37515285) N
+(CHIARA D'ANGELI) S 16 T () S 24 T (0328 1788507) N
+(CIANSI) S 8 T () S 16 T () S 24 T (44247785) N
+(CIUFFETTONE) S 16 T () S 24 T (0347 3400202) N
+(CLAUDIO GATTI) S 16 T () S 24 T (06 50913040) N
+(CLAUDIO SCALAMANDRE`    347 1976640 ) N
+(CODICE FELTRINELLI) S 24 T (\(2\) 50000 1022431) N
+(CODICE FISCALE) S 16 T () S 24 T (PGNNDR70P04H501L) N
+(CONTO S. PAOLO          CC=10/801109  ABI=1025  CAB=3219  00445102) N
+(CONTO BNP PARIBAS \(RIB = 30004 00086 00000388891 68\) ) N
+(CONTO BNP \(IBAN = FR76 3000 4000 8600 0003 8889 168\) \(m.lle montesinos\) 01 64861346 ) N
+(CONTO BNP 0820820002 \(blocco in francia\)  33 2 54546748 \(estero\) ) N
+(COSTANZA II) S 16 T () S 24 T (5815506) N
+(COSTANZA MONGINI) S 24 T (86327671) N
+(COSTANZA PADOA-SCHIOPPA 06 86205603 \(cellu\) 349 2178710) N
+(CRISTIANO PINNA) S 16 T () S 24 T (5800355) N
+(CRISTINA COSENTINO) S 24 T (0330 288494) N
+() N
+(# DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD) N
+() N
+(D'ERAMO MARCO) S 16 T () S 24 T (7008234) N
+(DAISY) S 8 T () S 16 T () S 24 T (72594364) N
+(DANIEL) S 8 T () S 16 T () S 24 T (051 6198821 dcd75@hotmail.com) N
+(DANIELA PIEROTTI \(cell\) 0348 7295775) N
+(DANIELE BARTOLUCCI) S 24 T (86890717) N
+(DANIELE VARSANO) S 16 T () S 24 T (8176674) S 32 T () S 40 T (d.varsano@caspur.it) N
+(agendina.txt) (Page 1/4) (Oct 19, 05 17:01) title
+border
+/v 1 store
+/x0 x v get 2.562000 add sx cw mul add store
+/y0 y v get bfs th add sub store
+x0 y0 moveto
+(DASY CATENA) p 16 T () S 24 T (06 72594364) N
+(DAVIDE VERGNI) S 16 T () S 24 T (\(casa peppe\) 06 5033404  \(cell\) 328 2547749 \(mum\) 06 4062392  ) N
+(DEBORAH DI CAVE) S 16 T () S 24 T (5881718) N
+(DIANA) S 8 T () S 16 T () S 24 T (44236708  \(cellu\) 0333 2925307) N
+(DOTTORANDI TEO. ROMA1) S 24 T (06 449914350) S 40 T () N
+() N
+(# EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE) N
+() N
+(EDO) S 8 T () S 16 T () S 24 T (0368 7107001) N
+(ELENA ROVEGLIA) S 16 T () S 24 T (06 8558462 \(cell\) 349 4939981) N
+(ELETTRA STIMILLI) S 24 T (06 535389  \(cell\) 333 3570874) N
+(ELISA TAVIANI) S 16 T () S 24 T (87191060) N
+(ELSY VIAGGI) S 16 T () S 24 T (2752616) N
+(EMANUELA ZACCARELLI     380 5463320 \(fidanzato\) 335 6334993) N
+(EMILIA LANAVE) S 16 T () S 24 T (063216533) N
+(EMILIANO \(MILLO\)) S 24 T (57301018) N
+(EMILIANO CECCHINI) S 24 T (68802411  \(cell\) 0347 0544432) N
+(EMILIO DE SANTIS) S 24 T (06 7805970) N
+(ENRICA GISSI) S 16 T () S 24 T (06 4395043) N
+(ENZO MARINARI) S 16 T () S 24 T (06 4744051  \(cell\) 0335 6223357 ) N
+(ERNESTO \(bulk\)) S 16 T () S 24 T (0339 2744441) N
+(EVA GILMORE) S 16 T () S 24 T (5800927 \(cell\) 0349 1200801 \(MUM\)) S 64 T (06 8610919) N
+(EVANGELISTA RINALDO) S 24 T (44879260) N
+() N
+(# FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF) N
+() N
+(FABIO STERPONE) S 16 T () S 24 T (\(casa roma\) 7194430 \( cell roma \) 0388 8406072) N
+(FABIO STERPONE    \(ellenique \) 01 58102189  \(CEA\) 01 69084006  cell 06 03134175) N
+(FABRIZIO BARDELLI  \(cell. francia\) 06 13918994) N
+(FEDERICO \(banlieue\)) S 24 T (0347 1645595) N
+(FEDERICO LUNADEI        \(cell\) 347 7450771 \(MUM\) 06 5800589  ) N
+(FEDERICO RICCI) S 16 T () S 24 T (040 410984 \(cell\) 0335 6873270 ) N
+(FEDERICO RICCI  \(PUP\)) S 24 T (06 30813979) N
+(FIORELLA KOSTORIS) S 24 T (335 393703 \(casa\) 06 68192450) N
+(FLORIANA) S 16 T () S 24 T (5080331) N
+(FLORIANA MENDEZ) S 16 T (\(cell\)) S 24 T (0347 6079123  \(casa\) 0794 367348) N
+(FRANCESCA CONSOLI) S 24 T (06 87183018) N
+(FRANCESCA D'ALESSIO) S 24 T (5115628) N
+(FRANCESCA TRIA) S 16 T () S 24 T (06 70495250 \(cell\) 340 5947153) N
+(FRANCESCO) S 16 T () S 24 T (06 36001094) N
+(FRANCESCO ROSATI) S 24 T (06 5744149 \(tov\) 06 72594504) N
+(FRANCESCO SYLOS \(cell paris\) 06 76455723) N
+(FRANZ \(milano\)) S 16 T () S 24 T (0338 2826191 \(?\) ) N
+() N
+(# GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG) N
+() N
+(GABRIELE MIGLIORINI) S 24 T () S 32 T (06 6874995) N
+(GABRIELLA MAGIULLI) S 24 T () S 32 T (06 3332088) N
+(GANDUS ROBERTO) S 16 T () S 24 T () S 32 T (\(cell\) 347 2446335 \(casa roma\) 06 5212558 ) N
+(GIACOMO FARIOLI) S 16 T () S 24 T (\(roma\)) S 32 T (06 3226403 \(nazzano\) 0765 332168 \(cell\) 335 8246614) N
+(GIANLUCA \(CATANESE\)) S 24 T () S 32 T (0339 2650667) N
+(GIANLUCA VACCARO) S 24 T () S 32 T (06 8171423) N
+(GIANMARCO \(BANLIEUE\)) S 24 T () S 32 T (0338 4724500 ) N
+(GIORGIO PARISI) S 16 T (   \(CASA\)) S 32 T (06 86214766 \(UFF\)) S 56 T (06 49913481 \(cel\) 335 7006458) N
+(GIOVANNI CAPELLINI \(CELL\)) S 32 T (320 1583588  \(CASA\) 06 3242061) N
+(GIOVANNI CAPELLINI \(MUM\)) S 32 T (06 88641779) N
+(GIULIA FADDA) S 16 T () S 24 T () S 32 T (\(r. montreuil 80 76a34 \) 01 40097921 \(uff.\) 01 69477683 ) N
+(GIULIA MASI \(CASA\)) S 24 T () S 32 T (06 272930 CELL 347 6123764) N
+(GIULIA MASI \(MUM\)) S 24 T () S 32 T (06 86209526) N
+(GIULIANA VISCO) S 16 T (\(cell\)) S 24 T () S 32 T (0347 0882910) N
+(GIUSY GUARINO) S 16 T () S 24 T () S 32 T (0631 77341 347 860583 347 86058\(0137\) 0631 4486) N
+() N
+(# IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIHHHHHHHHHHHHHHHHHHHHHHHH) N
+() N
+(HT SYSTEMS \(moretti\)) S 24 T () S 32 T (06 87132658) N
+(ICTP) S 8 T () S 16 T () S 24 T () S 32 T (040 2240208) N
+(ILARIA MECCOLI) S 16 T () S 24 T () S 32 T (0521 255098) N
+(IO CELLULARE) S 16 T () S 24 T () S 32 T (333 7609144) N
+(IO PARIGI) S 16 T () S 24 T () S 32 T (01 45808359) N
+(IO TORINO) S 16 T () S 24 T () S 32 T (011 19714156) N
+(IRENE E ANDREA \(roma\)) S 24 T () S 32 T (06 4940737) N
+(ISI) S 8 T () S 16 T () S 24 T () S 32 T (\(stanza 5\) 011 6603555 \(int 176\)) N
+(JEAN-IVE) S 16 T () S 24 T () S 32 T (0033 1 42093295  \(cell paris\) 06 84601918 ) N
+(JOVANKA LUKIC) S 16 T () S 24 T () S 32 T (349 7847500) N
+() N
+(# KKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKK) N
+() N
+(k2) S 8 T () S 16 T () S 24 T () S 32 T (sHukr;n7) N
+(KATYA POPOVA 12 COMMONWEALTH AV.\(781\) 581-1259 SWAMPACOTT MASS. 01907) N
+(KETTY) S 8 T () S 16 T () S 24 T () S 32 T (0347 7610553) N
+(KIRK) S 8 T ( 011 19707563 - 347 6169105 c.so de Gasperi 29 \(zona "crocetta"\)) N
+() N
+(# LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL) N
+() N
+(LALLO) S 8 T () S 16 T () S 24 T () S 32 T (06 4457352) N
+(agendina.txt) (Page 2/4) (Oct 19, 05 17:01) title
+border
+grestore
+(Printed by Andrea Pagnani) rhead
+(agendina.txt) (1/2) (Wednesday October 19, 2005) footer
+end % of iso1dict
+pagesave restore
+showpage
+%%Page: (3-4) 2
+%%BeginPageSetup
+/pagesave save def
+sh 0 translate 90 rotate
+%%EndPageSetup
+iso1dict begin
+gsave
+llx lly 12 add translate
+/v 0 store
+/x0 x v get 2.562000 add sx cw mul add store
+/y0 y v get bfs th add sub store
+x0 y0 moveto
+(LARA BENFATTO \(casa\) 06 4078359 \(TRICASE\)) p 48 T () S 56 T (0833 775095) N
+(LELLI SIMONE) S 16 T () S 24 T () S 32 T (050 934165) N
+(LEXI) S 8 T () S 16 T () S 24 T () S 32 T (06 8088186  \(cell\) 0338 9539702) N
+(LIBERAZIONE) S 16 T () S 24 T () S 32 T (06 441831) N
+(LIU CATENA) S 16 T () S 24 T () S 32 T (06 72594301) N
+(LIVIA AROMATARIO) S 24 T () S 32 T (06 7140504) N
+(LOREDANA CORREALE) S 24 T () S 32 T (0765 39472 \(cell\) 333 9682995) N
+(LORENZO SANSONETTI \(CELLU\)) S 32 T (340 7030084 \(MUM\) 06 86217630) N
+(LORI MARKSON       \(BERKELEY\)) S 32 T (001.510.5970896) N
+(LUCA BIFERALE) S 16 T (   \(CELLU\)) S 32 T (0349 6494879) N
+(LUCA CORRADINI) S 16 T () S 24 T () S 32 T (06 5681730) N
+(LUCA DE LORENZO) S 16 T (\(MUM\)) S 24 T () S 32 T (06 6385290  \(cell\) 347 7797280) N
+(LUCA DE LORENZO \(CASA\)) S 24 T () S 32 T (06 33253519  \(lab\) 06 4991 3435 ) N
+(LUCA LEUZZI                     \(CASA\) 06 5816227 \(MUM\) 06 5800585 ) N
+(LUCA LEUZZI                     \(UNI\) 06 49913459 \(CELL\) 333 7236191 ) N
+(LUCA SALMIERI \(NAPOLI\)) S 24 T () S 32 T (081 457940  \(CELL\) 0335 8377279 ) N
+(LUCA SURIANO) S 16 T () S 24 T () S 32 T (\(casa\) 06 87136097  \(cell\) 0330 980297) N
+(LUCA TOMASSINI                  \(cell\) 349 3206214 \(roma NAZ\) 06 6790932 \(nonna\) 06 5409206) N
+(LUCA TOMASSINI) S 16 T () S 24 T () S 32 T (\(casa\) 06 3214143) N
+() N
+(# MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM) N
+() N
+(MADDALENA PIAZZO) S 24 T () S 32 T (06 4456626 \(mum\) 06 85303346) N
+(MAMMA \(UFFICIO\)) S 16 T () S 24 T () S 32 T (06 44280423) N
+(MANU \(FORTE\)) S 16 T () S 24 T () S 32 T (338 3867782) N
+(MARCELLO MAGI) S 16 T () S 24 T () S 32 T (06 21709434) N
+(MARCELLO MARIUZZO) S 24 T () S 32 T (06 7012889) N
+(MARCO MAGNI) S 16 T () S 24 T () S 32 T (06 86326638) N
+(MARCO PRESTI \(AMMINISTRATORE\)   06 7108396 \(FAX\) 71582282 \(CELL\) 0337 429043) N
+(MARCO VIA) S 16 T () S 24 T () S 32 T (0347 3206035) N
+(MARCUS) S 8 T (ABEL) S 16 T () S 24 T () S 32 T (06 86208703) N
+(MARIACARLA) S 16 T () S 24 T () S 32 T (06 5740843) N
+(MARIAVALENTINA) S 16 T () S 24 T () S 32 T (0348 7424179) N
+(MARILLA) S 8 T () S 16 T () S 24 T () S 32 T (06 55265919) N
+(MARSIA BLOND) S 16 T () S 24 T () S 32 T (338 3160765) N
+(MARTIN WEIGT \(casa\)) S 24 T () S 32 T (011 8391673) N
+(MASHA GRANIK \(USA\)) S 24 T () S 32 T (617-739-0636) N
+(MASSI \(QUARTA\)) S 16 T () S 24 T () S 32 T (328 9444364) N
+(MASSIMILIANO STACCHINI) S 24 T () S 32 T (06 787226) N
+(MATTEO CAMPELLONE) S 24 T () S 32 T (0334 6152214) N
+(MATTEO PALASSINI \(cell. paris\)) S 32 T (06 17821335) N
+(MATTHIEU) S 16 T () S 24 T () S 32 T (0339 1182172) N
+(MAURO CAPOCCI) S 16 T () S 24 T () S 32 T (06 5403838 \(cell\) 0328 0049617) N
+(MAURO GAGIOTTI) S 16 T () S 24 T () S 32 T (328 5689589 ) N
+(MICHAEL JOICE) S 16 T () S 24 T () S 32 T (01 45802524 \(rue esperance 34 A6123 II dx\)) N
+(MICHELE GIANFELICE) S 24 T () S 32 T (06 5292117) N
+(MICHELE LEONE) S 16 T () S 24 T () S 32 T (\(cell\)  349 1912375 \(casa\) 011 6504822) N
+(MODEM TORVERGATA) S 24 T () S 32 T (06 72594558\(17\)) N
+(MONICA) S 8 T () S 16 T () S 24 T () S 32 T (347 1468069) N
+(MONICA) S 8 T () S 16 T () S 24 T () S 32 T (\(cell paris\) 06 21132495 ) N
+(MOUSSA) S 8 T () S 16 T () S 24 T () S 32 T (0349 4226854) N
+() S 8 T () S 16 T () S 24 T () S 32 T (   ) N
+(# NNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN) N
+() N
+(NATI                            06 25042287) N
+(NICCOLO CAU) S 16 T () S 24 T () S 32 T (06 44266322 ) N
+(NICOLA \(ANTONIA\)) S 24 T () S 32 T (0347 6414022) N
+(ORSAY MIO) S 16 T () S 24 T () S 32 T (01 69157339) N
+(OLIVIER MARTIN) S 16 T () S 24 T () S 32 T (\(casa\) 01 69313338 \(uff. orsay\) 01 69157324 ) N
+() N
+(# PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP) N
+() N
+(PAOLA GORI GIORGI) S 24 T () S 32 T (\(uff.\) 06 49913445 \(casa roma\) 06 5884096) N
+(PAOLA IANNIZZOTTO) S 24 T () S 32 T (06 7096101) N
+(PAOLO DE RISO) S 16 T () S 24 T (\(tov\)) S 32 T (06 72594504) N
+(PAOLO PAGNANI) S 16 T () S 24 T () S 32 T (335 6117913) N
+(PAPA' \(UFFICIO\)) S 16 T () S 24 T () S 32 T (06 44280429) N
+(PASQUALE ZITO           \(casa\)  06 5740188 \(tov\) 72594714) N
+(PATRIK) S 8 T () S 16 T () S 24 T ( \(CASA\) 01 45812031 \(A5213\) \(CELL\) 06 19059782) N
+(PEPPE DE CRISTOFARO) S 24 T () S 32 T (06 4423411) N
+(PETER KRUGER) S 16 T () S 24 T () S 32 T (0348 4074087) N
+(PIANTA MARIO) S 16 T () S 24 T () S 32 T (06 44879206) N
+(PIERRE \(NORMADIA\)) S 24 T () S 32 T (0033\(2\)) S 40 T (33719015) N
+(PIETRO CAMPANER) S 16 T () S 24 T () S 32 T (320 0249155) N
+(PIETRO CHIMENTI) S 16 T () S 24 T () S 32 T (328 3081593) N
+(PINO MASI) S 16 T () S 24 T () S 32 T (06 3230421) N
+(PIQUE) S 8 T () S 16 T () S 24 T () S 32 T (06 14954171 \(jose@abc.com\)) N
+(PIT) S 8 T () S 16 T () S 24 T () S 32 T (340 2252965) N
+(PIZZI) S 8 T (         \(cell paris\)   06 66561889 ) N
+(PULIKA) S 8 T () S 16 T () S 24 T () S 32 T (06 69920623 \(cell\) 0347 6635971 ) N
+() N
+(# RRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR) N
+() N
+(RICCARDO \(cell\)) S 16 T () S 24 T () S 32 T (0338 2199512 \(casa\) 06  270015) N
+(RICCARDO ZECCHINA \(CASA\)) S 32 T (040 412780 \(cell\) 0335 7001990) S 64 T () N
+(agendina.txt) (Page 3/4) (Oct 19, 05 17:01) title
+border
+/v 1 store
+/x0 x v get 2.562000 add sx cw mul add store
+/y0 y v get bfs th add sub store
+x0 y0 moveto
+(ROBERTA MANTOVANI) p 24 T () S 32 T (06 71495825) N
+(ROBERTA \(RICCARDO\)) S 24 T () S 32 T (0328 8390776) N
+(ROBERTO MULET \(L'HAVANA UFF\)) S 32 T (\(00537\) 781182 782369 782687 EXT 33. ) N
+(ROBERTO MULET \(L'HAVANA\)) S 32 T (985421 ) N
+(RUDY) S 8 T () S 16 T () S 24 T () S 32 T (06 23268928) N
+() N
+(# SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS) N
+() N
+(SABINA \(CASA\)) S 16 T () S 24 T () S 32 T (06 58205165) N
+(SABINA \(UFF\)) S 16 T () S 24 T () S 32 T (06 8554900) N
+(SAVINA) S 8 T () S 16 T () S 24 T () S 32 T (338 9394153 ) N
+(SACCO  \(cell\)) S 16 T () S 24 T () S 32 T (0347 5752154) N
+(SALINA \(GIORDANO & GIUSEPPINA\)  090 9809100 ) N
+(SANDRA) S 8 T () S 16 T () S 24 T () S 32 T (06 86898289) N
+(SANDRA \(LOLLI\)) S 16 T () S 24 T () S 32 T (347 3010917 \(casa\) 0765 39678) S 64 T () S 72 T () N
+(SANDRITA ROCA-REY  0586 888096) N
+(SARA CENTILI) S 16 T () S 24 T () S 32 T (06 5747625) N
+(SARA FOI \(LAVORO\)) S 24 T () S 32 T (0771 85273) N
+(SARA MARCUCCI  \(CELL\)) S 24 T () S 32 T (0333 2711465) N
+(SARA MORUCCI \(casa\)) S 24 T () S 32 T (06 538725 \(cellu\) 0339 3443294) N
+(SCORDINO \(CASA\)) S 16 T () S 24 T () S 32 T (06 5004602) N
+(SEBASTIANO CARPI                \(cell\) 338 5606680 \(MUM\) 06 4828494) N
+(SECURITE SOCIALE                1 70 09 99 127 166 06) N
+(SERENA BUONTEMPO) S 24 T () S 32 T (338 1746954) N
+(SILVIA) S 8 T () S 16 T () S 24 T () S 32 T (06 8182489) N
+(SILVIO FRANZ                    \(cell\) 040 351617 \(cell\) 347 2745673 \(paris\) 01 48070321) N
+(SIMONE \(ROSCIO\)) S 16 T () S 24 T () S 32 T (06 6551198) N
+(SKOLA) S 8 T () S 16 T () S 24 T () S 32 T (06 490817) N
+(SONIA CANNIZZO) S 16 T () S 24 T () S 32 T (06 5897715) N
+(SONIA GENTILE) S 16 T () S 24 T () S 32 T (06 8124057) N
+(STANZA 186) S 16 T () S 24 T () S 32 T (06 49914394) N
+(STANZA VIM) S 16 T () S 24 T () S 32 T (06 49913521) N
+(STEFANO ARNONE) S 16 T () S 24 T () S 32 T (06 87190157) N
+(STEFANO CILIBERTI \(madrid\)) S 32 T (+34 91 5594152) N
+(STEFANO MOSSA \(paris uni\) 01 44277239 \(casa\) 01 43264457 \(35A78\) ) N
+(STEFANO ROSATI) S 16 T () S 24 T () S 32 T (06 8606777) N
+(STEFANO TONAZZI \( paris \) 01 43150521) N
+() N
+(# TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT) N
+() N
+(TARGA PEUGEOT 206 SW            CK 787 DN) N
+(TERRE \(TORRE\)) S 16 T () S 24 T () S 32 T (06 8273542) N
+(TIZIANO) S 8 T (PETRITOLI) S 24 T () S 32 T (06 5681301) N
+(TOMAS GRIGERA) S 16 T () S 24 T () S 32 T (06 82002118) N
+(TOMMASO RIZZO) S 16 T () S 24 T () S 32 T (06 44703842 \(cell\) 0328 3874269) N
+(TOMMASO RIZZO \(MUM\)) S 24 T () S 32 T (06 8419923) N
+(TORRE) S 8 T () S 16 T () S 24 T () S 32 T (06 822869) N
+(TREMONTI) S 16 T () S 24 T () S 32 T (0863 679853) N
+() N
+(# UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU) N
+() N
+(ULIANO) S 8 T () S 16 T () S 24 T () S 32 T (06 39387847 347 1671233 ) N
+(UNIVERSITA` IVA) S 16 T () S 24 T () S 32 T (021 33771002 C.F. 80209930587 ) N
+() N
+(# VVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV) N
+() N
+(VALENTINA BEATO) S 16 T () S 24 T () S 32 T (06 77204076) N
+(VALERIA \(CELL\)) S 16 T () S 24 T () S 32 T (0339 2772726 \(GENITORI\) 06 37516358 \(NONNA\) 06 44236480) N
+(VALERIA MINCIONE) S 24 T () S 32 T (340 5754672) N
+(VALERIA RIBEIRO) S 16 T () S 24 T () S 32 T (06 87181183 \(MUM\) 06 5883389 ) N
+(VALLE) S 8 T () S 16 T () S 24 T () S 32 T (0338 8574145) N
+(VEGLIA DE FILIPPI 011 4337120 via cialdini 9 BNL AG 1 ABI=01005 CAB 1001 CC=14347) N
+(VELIA \(CASA\)) S 16 T () S 24 T () S 32 T (06 5759200) N
+(VELIA \(CELL\)) S 16 T () S 24 T () S 32 T (0338 3421168 \(TOV\) 06 72594554) N
+(VICTOR) S 8 T () S 16 T () S 24 T () S 32 T (0333 3157257) N
+(VITO \(CASA\)) S 16 T () S 24 T () S 32 T (06 88641348) N
+(VITO MENNELLA \(LAB\)) S 24 T () S 32 T (06 49902891) N
+() N
+(# YYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY) N
+() N
+(YURIJ CASTELFRANCHI \(tr casa\)) S 32 T (040 3787462 \(cell\) 0340 3009801) N
+(YURIJ CASTELFRANCHI \(roma casa\)) S 32 T (06 3296944) N
+(YAMINA) S 8 T () S 16 T () S 24 T () S 32 T (0339 3462464 \(NONNI\) 06 7214874) N
+() N
+(# ZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ) N
+() N
+(ZIA CARLA) S 16 T () S 24 T () S 32 T (06 82003368) N
+(ZIA MARISA) S 16 T () S 24 T () S 32 T (015 922784) N
+(ZULLO) S 8 T () S 16 T () S 24 T () S 32 T (0347 8726140) N
+() N
+(agendina.txt) (Page 4/4) (Oct 19, 05 17:01) title
+border
+grestore
+(Printed by Andrea Pagnani) rhead
+(agendina.txt) (2/2) (Wednesday October 19, 2005) footer
+end % of iso1dict
+pagesave restore
+showpage
+
+%%Trailer
+end
+%%EOF
