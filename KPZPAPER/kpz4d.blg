@@ -1,0 +1,48 @@
+This is BibTeX, Version 0.99c (TeX Live 2009/Debian)
+The top-level auxiliary file: kpz4d.aux
+The style file: apsrev4-1.bst
+Reallocated wiz_functions (elt_size=4) to 6000 items from 3000.
+Database file #1: kpz4dNotes.bib
+Database file #2: kpz4d.bib
+Merlin.mbs v4.21 2009-07-09. 
+You've used 31 entries,
+            3913 wiz_defined-function locations,
+            1558 strings with 19386 characters,
+and the built_in function-call counts, 21303 in all, are:
+= -- 1145
+> -- 301
+< -- 81
++ -- 112
+- -- 81
+* -- 3430
+:= -- 1674
+add.period$ -- 31
+call.type$ -- 31
+change.case$ -- 1
+chr.to.int$ -- 0
+cite$ -- 62
+duplicate$ -- 2386
+empty$ -- 1974
+format.name$ -- 270
+if$ -- 3972
+int.to.chr$ -- 0
+int.to.str$ -- 31
+missing$ -- 446
+newline$ -- 312
+num.names$ -- 31
+pop$ -- 813
+preamble$ -- 1
+purify$ -- 0
+quote$ -- 2
+skip$ -- 735
+stack$ -- 0
+substring$ -- 390
+swap$ -- 2268
+text.length$ -- 81
+text.prefix$ -- 0
+top$ -- 1
+type$ -- 81
+warning$ -- 0
+while$ -- 58
+width$ -- 33
+write$ -- 469

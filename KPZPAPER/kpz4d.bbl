@@ -1,0 +1,425 @@
+%Merlin.mbs v4.21 2009-07-09.
+\begin{thebibliography}{10}%
+\makeatletter
+\providecommand \@ifxundefined [1]{%
+ \ifx #1\undefined \expandafter \@firstoftwo
+ \else \expandafter \@secondoftwo
+\fi
+}%
+\providecommand \@ifnum [1]{%
+ \ifnum #1\expandafter \@firstoftwo
+ \else \expandafter \@secondoftwo
+\fi
+}%
+\providecommand \enquote [1]{``#1''}%
+\providecommand \bibnamefont  [1]{#1}%
+\providecommand \bibfnamefont [1]{#1}%
+\providecommand \citenamefont [1]{#1}%
+\providecommand\href[0]{\@sanitize\@href}%
+\providecommand\@href[1]{\endgroup\@@startlink{#1}\endgroup\@@href}%
+\providecommand\@@href[1]{#1\@@endlink}%
+\providecommand \@sanitize [0]{\begingroup\catcode`\&12\catcode`\#12\relax}%
+\@ifxundefined \pdfoutput {\@firstoftwo}{%
+ \@ifnum{\z@=\pdfoutput}{\@firstoftwo}{\@secondoftwo}%
+}{%
+ \providecommand\@@startlink[1]{\leavevmode\special{html:<a href="#1">}}%
+ \providecommand\@@endlink[0]{\special{html:</a>}}%
+}{%
+ \providecommand\@@startlink[1]{%
+  \leavevmode
+  \pdfstartlink
+   attr{/Border[0 0 1 ]/H/I/C[0 1 1]}%
+   user{/Subtype/Link/A<</Type/Action/S/URI/URI(#1)>>}%
+  \relax
+ }%
+ \providecommand\@@endlink[0]{\pdfendlink}%
+}%
+\providecommand \url  [0]{\begingroup\@sanitize \@url }%
+\providecommand \@url [1]{\endgroup\@href {#1}{\urlprefix}}%
+\providecommand \urlprefix [0]{URL }%
+\providecommand \Eprint[0]{\href }%
+\@ifxundefined \urlstyle {%
+  \providecommand \doi [1]{doi:\discretionary{}{}{}#1}%
+}{%
+  \providecommand \doi [0]{doi:\discretionary{}{}{}\begingroup
+  \urlstyle{rm}\Url }%
+}%
+\providecommand \doibase [0]{http://dx.doi.org/}%
+\providecommand \Doi[1]{\href{\doibase#1}}%
+\providecommand \bibAnnote [3]{%
+  \BibitemShut{#1}%
+  \begin{quotation}\noindent
+    \textsc{Key:}\ #2\\\textsc{Annotation:}\ #3%
+  \end{quotation}%
+}%
+\providecommand \bibAnnoteFile [2]{%
+  \IfFileExists{#2}{\bibAnnote {#1} {#2} {\input{#2}}}{}%
+}%
+\providecommand \typeout [0]{\immediate \write \m@ne }%
+\providecommand \selectlanguage [0]{\@gobble}%
+\providecommand \bibinfo [0]{\@secondoftwo}%
+\providecommand \bibfield [0]{\@secondoftwo}%
+\providecommand \translation [1]{[#1]}%
+\providecommand \BibitemOpen[0]{}%
+\providecommand \bibitemStop [0]{}%
+\providecommand \bibitemNoStop [0]{.\EOS\space}%
+\providecommand \EOS [0]{\spacefactor3000\relax}%
+\providecommand \BibitemShut [1]{\csname bibitem#1\endcsname}%
+%</preamble>
+\bibitem{KPZ86}%
+  \BibitemOpen
+  \bibfield{author}{%
+  \bibinfo {author} {\bibfnamefont{M.}~\bibnamefont{Kardar}}, \bibinfo {author}
+  {\bibfnamefont{G.}~\bibnamefont{Parisi}},\ and\ \bibinfo {author}
+  {\bibfnamefont{Y.-C.}\ \bibnamefont{Zhang}},\ }%
+  \bibfield{journal}{%
+  \Doi{10.1103/PhysRevLett.56.889}{\bibinfo {journal} {Phys. Rev. Lett.}}\ }%
+  \textbf{\bibinfo {volume} {56}},\ \bibinfo {pages} {889} (\bibinfo {month}
+  {Mar}\ \bibinfo {year} {1986}),\
+  \url{http://link.aps.org/doi/10.1103/PhysRevLett.56.889}%
+  \bibAnnoteFile{NoStop}{KPZ86}%
+\bibitem{FamilyVicsekBook}%
+  \BibitemOpen
+  \bibfield{author}{%
+  \bibinfo {author} {\bibfnamefont{F.}~\bibnamefont{Family}}\ and\ \bibinfo
+  {author} {\bibfnamefont{T.}~\bibnamefont{Vicsek}},\ }%
+  \emph{\bibinfo {title} {Dynamics of fractal surfaces}}\ (\bibinfo {publisher}
+  {World Scientific},\ \bibinfo {year} {1991})\ ISBN \bibinfo {isbn}
+  {9789810207212},\ \url{http://books.google.it/books?id=5e8COU6flIkC}%
+  \bibAnnoteFile{NoStop}{FamilyVicsekBook}%
+\bibitem{BarabasiBook}%
+  \BibitemOpen
+  \bibfield{author}{%
+  \bibinfo {author} {\bibfnamefont{A.}~\bibnamefont{Barab{\'a}si}}\ and\
+  \bibinfo {author} {\bibfnamefont{H.}~\bibnamefont{Stanley}},\ }%
+  \emph{\bibinfo {title} {Fractal concepts in surface growth}}\ (\bibinfo
+  {publisher} {Cambridge University Press},\ \bibinfo {year} {1995})\ ISBN
+  \bibinfo {isbn} {9780521483186},\
+  \url{http://books.google.it/books?id=W4SqcNr8PLYC}%
+  \bibAnnoteFile{NoStop}{BarabasiBook}%
+\bibitem{Halpin-Healy1990}%
+  \BibitemOpen
+  \bibfield{author}{%
+  \bibinfo {author} {\bibfnamefont{T.}~\bibnamefont{Halpin-Healy}},\ }%
+  \bibfield{journal}{%
+  \Doi{10.1103/PhysRevA.42.711}{\bibinfo {journal} {Phys. Rev. A}}\ }%
+  \textbf{\bibinfo {volume} {42}},\ \bibinfo {pages} {711} (\bibinfo {month}
+  {Jul}\ \bibinfo {year} {1990}),\
+  \url{http://link.aps.org/doi/10.1103/PhysRevA.42.711}%
+  \bibAnnoteFile{NoStop}{Halpin-Healy1990}%
+\bibitem{Cook-Derrida1990}%
+  \BibitemOpen
+  \bibfield{author}{%
+  \bibinfo {author} {\bibfnamefont{J.}~\bibnamefont{Cook}}\ and\ \bibinfo
+  {author} {\bibfnamefont{B.}~\bibnamefont{Derrida}},\ }%
+  \bibfield{journal}{%
+  \bibinfo {journal} {Journal of Physics A: Mathematical and General}\ }%
+  \textbf{\bibinfo {volume} {23}},\ \bibinfo {pages} {1523} (\bibinfo {year}
+  {1990}),\ \url{http://stacks.iop.org/0305-4470/23/i=9/a=017}%
+  \bibAnnoteFile{NoStop}{Cook-Derrida1990}%
+\bibitem{Schwartz-Edwards1998}%
+  \BibitemOpen
+  \bibfield{author}{%
+  \bibinfo {author} {\bibfnamefont{M.}~\bibnamefont{Schwartz}}\ and\ \bibinfo
+  {author} {\bibfnamefont{S.~F.}\ \bibnamefont{Edwards}},\ }%
+  \bibfield{journal}{%
+  \Doi{10.1103/PhysRevE.57.5730}{\bibinfo {journal} {Phys. Rev. E}}\ }%
+  \textbf{\bibinfo {volume} {57}},\ \bibinfo {pages} {5730} (\bibinfo {month}
+  {May}\ \bibinfo {year} {1998}),\
+  \url{http://link.aps.org/doi/10.1103/PhysRevE.57.5730}%
+  \bibAnnoteFile{NoStop}{Schwartz-Edwards1998}%
+\bibitem{Bouchaud-Cates1993}%
+  \BibitemOpen
+  \bibfield{author}{%
+  \bibinfo {author} {\bibfnamefont{J.~P.}\ \bibnamefont{Bouchaud}}\ and\
+  \bibinfo {author} {\bibfnamefont{M.~E.}\ \bibnamefont{Cates}},\ }%
+  \bibfield{journal}{%
+  \Doi{10.1103/PhysRevE.47.R1455}{\bibinfo {journal} {Phys. Rev. E}}\ }%
+  \textbf{\bibinfo {volume} {47}},\ \bibinfo {pages} {R1455} (\bibinfo {month}
+  {Mar}\ \bibinfo {year} {1993}),\
+  \url{http://link.aps.org/doi/10.1103/PhysRevE.47.R1455}%
+  \bibAnnoteFile{NoStop}{Bouchaud-Cates1993}%
+\bibitem{Bouchaud-Cates-Errata1993}%
+  \BibitemOpen
+  \bibfield{author}{%
+  \bibinfo {author} {\bibfnamefont{J.~P.}\ \bibnamefont{Bouchaud}}\ and\
+  \bibinfo {author} {\bibfnamefont{M.~E.}\ \bibnamefont{Cates}},\ }%
+  \bibfield{journal}{%
+  \Doi{10.1103/PhysRevE.48.635.2}{\bibinfo {journal} {Phys. Rev. E}}\ }%
+  \textbf{\bibinfo {volume} {48}},\ \bibinfo {pages} {635} (\bibinfo {month}
+  {Jul}\ \bibinfo {year} {1993}),\
+  \url{http://link.aps.org/doi/10.1103/PhysRevE.48.635.2}%
+  \bibAnnoteFile{NoStop}{Bouchaud-Cates-Errata1993}%
+\bibitem{DMKB1994}%
+  \BibitemOpen
+  \bibfield{author}{%
+  \bibinfo {author} {\bibfnamefont{J.~P.}\ \bibnamefont{Doherty}}, \bibinfo
+  {author} {\bibfnamefont{M.~A.}\ \bibnamefont{Moore}}, \bibinfo {author}
+  {\bibfnamefont{J.~M.}\ \bibnamefont{Kim}},\ and\ \bibinfo {author}
+  {\bibfnamefont{A.~J.}\ \bibnamefont{Bray}},\ }%
+  \bibfield{journal}{%
+  \Doi{10.1103/PhysRevLett.72.2041}{\bibinfo {journal} {Phys. Rev. Lett.}}\ }%
+  \textbf{\bibinfo {volume} {72}},\ \bibinfo {pages} {2041} (\bibinfo {month}
+  {Mar}\ \bibinfo {year} {1994}),\
+  \url{http://link.aps.org/doi/10.1103/PhysRevLett.72.2041}%
+  \bibAnnoteFile{NoStop}{DMKB1994}%
+\bibitem{MBDMBC95}%
+  \BibitemOpen
+  \bibfield{author}{%
+  \bibinfo {author} {\bibfnamefont{M.~A.}\ \bibnamefont{Moore}}, \bibinfo
+  {author} {\bibfnamefont{T.}~\bibnamefont{Blum}}, \bibinfo {author}
+  {\bibfnamefont{J.~P.}\ \bibnamefont{Doherty}}, \bibinfo {author}
+  {\bibfnamefont{M.}~\bibnamefont{Marsili}}, \bibinfo {author}
+  {\bibfnamefont{J.-P.}\ \bibnamefont{Bouchaud}},\ and\ \bibinfo {author}
+  {\bibfnamefont{P.}~\bibnamefont{Claudin}},\ }%
+  \bibfield{journal}{%
+  \Doi{10.1103/PhysRevLett.74.4257}{\bibinfo {journal} {Phys. Rev. Lett.}}\ }%
+  \textbf{\bibinfo {volume} {74}},\ \bibinfo {pages} {4257} (\bibinfo {month}
+  {May}\ \bibinfo {year} {1995}),\
+  \url{http://link.aps.org/doi/10.1103/PhysRevLett.74.4257}%
+  \bibAnnoteFile{NoStop}{MBDMBC95}%
+\bibitem{Tu1994}%
+  \BibitemOpen
+  \bibfield{author}{%
+  \bibinfo {author} {\bibfnamefont{Y.}~\bibnamefont{Tu}},\ }%
+  \bibfield{journal}{%
+  \Doi{10.1103/PhysRevLett.73.3109}{\bibinfo {journal} {Phys. Rev. Lett.}}\ }%
+  \textbf{\bibinfo {volume} {73}},\ \bibinfo {pages} {3109} (\bibinfo {month}
+  {Dec}\ \bibinfo {year} {1994}),\
+  \url{http://link.aps.org/doi/10.1103/PhysRevLett.73.3109}%
+  \bibAnnoteFile{NoStop}{Tu1994}%
+\bibitem{ColaioriMoore2001}%
+  \BibitemOpen
+  \bibfield{author}{%
+  \bibinfo {author} {\bibfnamefont{F.}~\bibnamefont{Colaiori}}\ and\ \bibinfo
+  {author} {\bibfnamefont{M.~A.}\ \bibnamefont{Moore}},\ }%
+  \bibfield{journal}{%
+  \Doi{10.1103/PhysRevLett.86.3946}{\bibinfo {journal} {Phys. Rev. Lett.}}\ }%
+  \textbf{\bibinfo {volume} {86}},\ \bibinfo {pages} {3946} (\bibinfo {month}
+  {Apr}\ \bibinfo {year} {2001}),\
+  \url{http://link.aps.org/doi/10.1103/PhysRevLett.86.3946}%
+  \bibAnnoteFile{NoStop}{ColaioriMoore2001}%
+\bibitem{Laessig1995}%
+  \BibitemOpen
+  \bibfield{author}{%
+  \bibinfo {author} {\bibfnamefont{M.}~\bibnamefont{L\"assig}},\ }%
+  \bibfield{journal}{%
+  \Doi{10.1016/0550-3213(95)00268-W}{\bibinfo {journal} {Nuclear Physics B}}\
+  }%
+  \textbf{\bibinfo {volume} {448}},\ \bibinfo {pages} {559 } (\bibinfo {year}
+  {1995}),\ ISSN \bibinfo {issn} {0550-3213},\
+  \url{http://www.sciencedirect.com/science/article/pii/055032139500268W}%
+  \bibAnnoteFile{NoStop}{Laessig1995}%
+\bibitem{Laessig-Kinzelbach1997}%
+  \BibitemOpen
+  \bibfield{author}{%
+  \bibinfo {author} {\bibfnamefont{M.}~\bibnamefont{L\"assig}}\ and\ \bibinfo
+  {author} {\bibfnamefont{H.}~\bibnamefont{Kinzelbach}},\ }%
+  \bibfield{journal}{%
+  \Doi{10.1103/PhysRevLett.78.903}{\bibinfo {journal} {Phys. Rev. Lett.}}\ }%
+  \textbf{\bibinfo {volume} {78}},\ \bibinfo {pages} {903} (\bibinfo {month}
+  {Feb}\ \bibinfo {year} {1997}),\
+  \url{http://link.aps.org/doi/10.1103/PhysRevLett.78.903}%
+  \bibAnnoteFile{NoStop}{Laessig-Kinzelbach1997}%
+\bibitem{Frogedby2006}%
+  \BibitemOpen
+  \bibfield{author}{%
+  \bibinfo {author} {\bibfnamefont{H.~C.}\ \bibnamefont{Fogedby}},\ }%
+  \bibfield{journal}{%
+  \Doi{10.1103/PhysRevE.73.031104}{\bibinfo {journal} {Phys. Rev. E}}\ }%
+  \textbf{\bibinfo {volume} {73}},\ \bibinfo {pages} {031104} (\bibinfo {month}
+  {Mar}\ \bibinfo {year} {2006}),\
+  \url{http://link.aps.org/doi/10.1103/PhysRevE.73.031104}%
+  \bibAnnoteFile{NoStop}{Frogedby2006}%
+\bibitem{CCDW2010}%
+  \BibitemOpen
+  \bibfield{author}{%
+  \bibinfo {author} {\bibfnamefont{L.}~\bibnamefont{Canet}}, \bibinfo {author}
+  {\bibfnamefont{H.}~\bibnamefont{Chat\'e}}, \bibinfo {author}
+  {\bibfnamefont{B.}~\bibnamefont{Delamotte}},\ and\ \bibinfo {author}
+  {\bibfnamefont{N.}~\bibnamefont{Wschebor}},\ }%
+  \bibfield{journal}{%
+  \Doi{10.1103/PhysRevLett.104.150601}{\bibinfo {journal} {Phys. Rev. Lett.}}\
+  }%
+  \textbf{\bibinfo {volume} {104}},\ \bibinfo {pages} {150601} (\bibinfo
+  {month} {Apr}\ \bibinfo {year} {2010}),\
+  \url{http://link.aps.org/doi/10.1103/PhysRevLett.104.150601}%
+  \bibAnnoteFile{NoStop}{CCDW2010}%
+\bibitem{KK1989}%
+  \BibitemOpen
+  \bibfield{author}{%
+  \bibinfo {author} {\bibfnamefont{J.~M.}\ \bibnamefont{Kim}}\ and\ \bibinfo
+  {author} {\bibfnamefont{J.~M.}\ \bibnamefont{Kosterlitz}},\ }%
+  \bibfield{journal}{%
+  \Doi{10.1103/PhysRevLett.62.2289}{\bibinfo {journal} {Phys. Rev. Lett.}}\ }%
+  \textbf{\bibinfo {volume} {62}},\ \bibinfo {pages} {2289} (\bibinfo {month}
+  {May}\ \bibinfo {year} {1989}),\
+  \url{http://link.aps.org/doi/10.1103/PhysRevLett.62.2289}%
+  \bibAnnoteFile{NoStop}{KK1989}%
+\bibitem{WK1987}%
+  \BibitemOpen
+  \bibfield{author}{%
+  \bibinfo {author} {\bibfnamefont{D.~E.}\ \bibnamefont{Wolf}}\ and\ \bibinfo
+  {author} {\bibfnamefont{J.}~\bibnamefont{Kert\'ez}},\ }%
+  \bibfield{journal}{%
+  \bibinfo {journal} {EPL (Europhysics Letters)}\ }%
+  \textbf{\bibinfo {volume} {4}},\ \bibinfo {pages} {651} (\bibinfo {year}
+  {1987}),\ \url{http://stacks.iop.org/0295-5075/4/i=6/a=003}%
+  \bibAnnoteFile{NoStop}{WK1987}%
+\bibitem{TLFWD1992}%
+  \BibitemOpen
+  \bibfield{author}{%
+  \bibinfo {author} {\bibfnamefont{L.-H.}\ \bibnamefont{Tang}}, \bibinfo
+  {author} {\bibfnamefont{B.~M.}\ \bibnamefont{Forrest}},\ and\ \bibinfo
+  {author} {\bibfnamefont{D.~E.}\ \bibnamefont{Wolf}},\ }%
+  \bibfield{journal}{%
+  \Doi{10.1103/PhysRevA.45.7162}{\bibinfo {journal} {Phys. Rev. A}}\ }%
+  \textbf{\bibinfo {volume} {45}},\ \bibinfo {pages} {7162} (\bibinfo {month}
+  {May}\ \bibinfo {year} {1992}),\
+  \url{http://link.aps.org/doi/10.1103/PhysRevA.45.7162}%
+  \bibAnnoteFile{NoStop}{TLFWD1992}%
+\bibitem{Nissila1993}%
+  \BibitemOpen
+  \bibfield{author}{%
+  \bibinfo {author} {\bibfnamefont{T.}~\bibnamefont{Ala-Nissila}}, \bibinfo
+  {author} {\bibfnamefont{T.}~\bibnamefont{Hjelt}}, \bibinfo {author}
+  {\bibfnamefont{J.~M.}\ \bibnamefont{Kosterlitz}},\ and\ \bibinfo {author}
+  {\bibfnamefont{O.}~\bibnamefont{Ven\"al\"ainen}},\ }%
+  \bibfield{journal}{%
+  \bibinfo {journal} {Journal of Statistical Physics}\ }%
+  \textbf{\bibinfo {volume} {72}},\ \bibinfo {pages} {207} (\bibinfo {year}
+  {1993}),\ ISSN \bibinfo {issn} {0022-4715},\ \bibinfo {note}
+  {10.1007/BF01048047},\ \url{http://dx.doi.org/10.1007/BF01048047}%
+  \bibAnnoteFile{NoStop}{Nissila1993}%
+\bibitem{NOIKPZ2001}%
+  \BibitemOpen
+  \bibfield{author}{%
+  \bibinfo {author} {\bibfnamefont{E.}~\bibnamefont{Marinari}}, \bibinfo
+  {author} {\bibfnamefont{A.}~\bibnamefont{Pagnani}},\ and\ \bibinfo {author}
+  {\bibfnamefont{G.}~\bibnamefont{Parisi}},\ }%
+  \bibfield{journal}{%
+  \bibinfo {journal} {Journal of Physics A: Mathematical and General}\ }%
+  \textbf{\bibinfo {volume} {33}},\ \bibinfo {pages} {8181} (\bibinfo {year}
+  {2000}),\ \url{http://stacks.iop.org/0305-4470/33/i=46/a=303}%
+  \bibAnnoteFile{NoStop}{NOIKPZ2001}%
+\bibitem{NOIKPZ2002}%
+  \BibitemOpen
+  \bibfield{author}{%
+  \bibinfo {author} {\bibfnamefont{E.}~\bibnamefont{Marinari}}, \bibinfo
+  {author} {\bibfnamefont{A.}~\bibnamefont{Pagnani}}, \bibinfo {author}
+  {\bibfnamefont{G.}~\bibnamefont{Parisi}},\ and\ \bibinfo {author}
+  {\bibfnamefont{Z.}~\bibnamefont{R\'acz}},\ }%
+  \bibfield{journal}{%
+  \Doi{10.1103/PhysRevE.65.026136}{\bibinfo {journal} {Phys. Rev. E}}\ }%
+  \textbf{\bibinfo {volume} {65}},\ \bibinfo {pages} {026136} (\bibinfo {month}
+  {Jan}\ \bibinfo {year} {2002}),\
+  \url{http://link.aps.org/doi/10.1103/PhysRevE.65.026136}%
+  \bibAnnoteFile{NoStop}{NOIKPZ2002}%
+\bibitem{CMP1998}%
+  \BibitemOpen
+  \bibfield{author}{%
+  \bibinfo {author} {\bibfnamefont{C.}~\bibnamefont{Castellano}}, \bibinfo
+  {author} {\bibfnamefont{M.}~\bibnamefont{Marsili}},\ and\ \bibinfo {author}
+  {\bibfnamefont{L.}~\bibnamefont{Pietronero}},\ }%
+  \bibfield{journal}{%
+  \Doi{10.1103/PhysRevLett.80.3527}{\bibinfo {journal} {Phys. Rev. Lett.}}\ }%
+  \textbf{\bibinfo {volume} {80}},\ \bibinfo {pages} {3527} (\bibinfo {month}
+  {Apr}\ \bibinfo {year} {1998}),\
+  \url{http://link.aps.org/doi/10.1103/PhysRevLett.80.3527}%
+  \bibAnnoteFile{NoStop}{CMP1998}%
+\bibitem{CGMMP1998}%
+  \BibitemOpen
+  \bibfield{author}{%
+  \bibinfo {author} {\bibfnamefont{C.}~\bibnamefont{Castellano}}, \bibinfo
+  {author} {\bibfnamefont{A.}~\bibnamefont{Gabrielli}}, \bibinfo {author}
+  {\bibfnamefont{M.}~\bibnamefont{Marsili}}, \bibinfo {author}
+  {\bibfnamefont{M.~A.}\ \bibnamefont{Mu\~noz}},\ and\ \bibinfo {author}
+  {\bibfnamefont{L.}~\bibnamefont{Pietronero}},\ }%
+  \bibfield{journal}{%
+  \Doi{10.1103/PhysRevE.58.R5209}{\bibinfo {journal} {Phys. Rev. E}}\ }%
+  \textbf{\bibinfo {volume} {58}},\ \bibinfo {pages} {R5209} (\bibinfo {month}
+  {Nov}\ \bibinfo {year} {1998}),\
+  \url{http://link.aps.org/doi/10.1103/PhysRevE.58.R5209}%
+  \bibAnnoteFile{NoStop}{CGMMP1998}%
+\bibitem{CMMP1999}%
+  \BibitemOpen
+  \bibfield{author}{%
+  \bibinfo {author} {\bibfnamefont{C.}~\bibnamefont{Castellano}}, \bibinfo
+  {author} {\bibfnamefont{M.}~\bibnamefont{Marsili}}, \bibinfo {author}
+  {\bibfnamefont{M.~A.}\ \bibnamefont{Mu\~noz}},\ and\ \bibinfo {author}
+  {\bibfnamefont{L.}~\bibnamefont{Pietronero}},\ }%
+  \bibfield{journal}{%
+  \Doi{10.1103/PhysRevE.59.6460}{\bibinfo {journal} {Phys. Rev. E}}\ }%
+  \textbf{\bibinfo {volume} {59}},\ \bibinfo {pages} {6460} (\bibinfo {month}
+  {Jun}\ \bibinfo {year} {1999}),\
+  \url{http://link.aps.org/doi/10.1103/PhysRevE.59.6460}%
+  \bibAnnoteFile{NoStop}{CMMP1999}%
+\bibitem{HwaFrey1991}%
+  \BibitemOpen
+  \bibfield{author}{%
+  \bibinfo {author} {\bibfnamefont{T.}~\bibnamefont{Hwa}}\ and\ \bibinfo
+  {author} {\bibfnamefont{E.}~\bibnamefont{Frey}},\ }%
+  \bibfield{journal}{%
+  \Doi{10.1103/PhysRevA.44.R7873}{\bibinfo {journal} {Phys. Rev. A}}\ }%
+  \textbf{\bibinfo {volume} {44}},\ \bibinfo {pages} {R7873} (\bibinfo {month}
+  {Dec}\ \bibinfo {year} {1991}),\
+  \url{http://link.aps.org/doi/10.1103/PhysRevA.44.R7873}%
+  \bibAnnoteFile{NoStop}{HwaFrey1991}%
+\bibitem{FTUH1996}%
+  \BibitemOpen
+  \bibfield{author}{%
+  \bibinfo {author} {\bibfnamefont{E.}~\bibnamefont{Frey}}, \bibinfo {author}
+  {\bibfnamefont{U.~C.}\ \bibnamefont{T\"auber}},\ and\ \bibinfo {author}
+  {\bibfnamefont{T.}~\bibnamefont{Hwa}},\ }%
+  \bibfield{journal}{%
+  \Doi{10.1103/PhysRevE.53.4424}{\bibinfo {journal} {Phys. Rev. E}}\ }%
+  \textbf{\bibinfo {volume} {53}},\ \bibinfo {pages} {4424} (\bibinfo {month}
+  {May}\ \bibinfo {year} {1996}),\
+  \url{http://link.aps.org/doi/10.1103/PhysRevE.53.4424}%
+  \bibAnnoteFile{NoStop}{FTUH1996}%
+\bibitem{Moser1991}%
+  \BibitemOpen
+  \bibfield{author}{%
+  \bibinfo {author} {\bibfnamefont{K.}~\bibnamefont{Moser}}, \bibinfo {author}
+  {\bibfnamefont{J.}~\bibnamefont{KertÃ©sz}},\ and\ \bibinfo {author}
+  {\bibfnamefont{D.~E.}\ \bibnamefont{Wolf}},\ }%
+  \bibfield{journal}{%
+  \Doi{10.1016/0378-4371(91)90017-7}{\bibinfo {journal} {Physica A: Statistical
+  Mechanics and its Applications}}\ }%
+  \textbf{\bibinfo {volume} {178}},\ \bibinfo {pages} {215 } (\bibinfo {year}
+  {1991}),\ ISSN \bibinfo {issn} {0378-4371},\
+  \url{http://www.sciencedirect.com/science/article/pii/0378437191900177}%
+  \bibAnnoteFile{NoStop}{Moser1991}%
+\bibitem{Perlsman-Havlin2006}%
+  \BibitemOpen
+  \bibfield{author}{%
+  \bibinfo {author} {\bibfnamefont{E.}~\bibnamefont{Perlsman}}\ and\ \bibinfo
+  {author} {\bibfnamefont{S.}~\bibnamefont{Havlin}},\ }%
+  \bibfield{journal}{%
+  \bibinfo {journal} {EPL (Europhysics Letters)}\ }%
+  \textbf{\bibinfo {volume} {73}},\ \bibinfo {pages} {178} (\bibinfo {year}
+  {2006}),\ \url{http://stacks.iop.org/0295-5075/73/i=2/a=178}%
+  \bibAnnoteFile{NoStop}{Perlsman-Havlin2006}%
+\bibitem{Schwartz-Perlsman2011}%
+  \BibitemOpen
+  \bibfield{author}{%
+  \bibinfo {author} {\bibfnamefont{M.}~\bibnamefont{{Schwartz}}}\ and\ \bibinfo
+  {author} {\bibfnamefont{E.}~\bibnamefont{{Perlsman}}},\ }%
+  \bibfield{journal}{%
+  \bibinfo {journal} {ArXiv e-prints}}%
+   (\bibinfo {month} {Aug.}\ \bibinfo {year} {2011}),\
+  \Eprint{http://arxiv.org/abs/1108.4604}{arXiv:1108.4604
+  [cond-mat.stat-mech]}%
+  \bibAnnoteFile{NoStop}{Schwartz-Perlsman2011}%
+\bibitem{KellingOrdor2011}%
+  \BibitemOpen
+  \bibfield{author}{%
+  \bibinfo {author} {\bibfnamefont{J.}~\bibnamefont{{Kelling}}}\ and\ \bibinfo
+  {author} {\bibfnamefont{G.}~\bibnamefont{{{\'O}dor}}},\ }%
+  \bibfield{journal}{%
+  \bibinfo {journal} {ArXiv e-prints}}%
+   (\bibinfo {month} {Oct.}\ \bibinfo {year} {2011}),\
+  \Eprint{http://arxiv.org/abs/1110.6745}{arXiv:1110.6745
+  [cond-mat.stat-mech]}%
+  \bibAnnoteFile{NoStop}{KellingOrdor2011}%
+\end{thebibliography}%
