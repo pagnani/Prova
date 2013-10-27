@@ -1,3 +1,0 @@
-#! /bin/csh 
-a2ps --columns=2 -f $1 agendina.txt -o agendina.ps
-
